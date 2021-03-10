@@ -26,7 +26,8 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= dirs.js %>/cintter.js'
+                '<%= dirs.js %>/cintter.js',
+                '<%= dirs.js %>/vanilla-masker.js',
             ]
         },
 
@@ -36,6 +37,9 @@ module.exports = function (grunt) {
                 files: {
                     '<%= dirs.js %>/cintter.min.js': [
                         '<%= dirs.js %>/cintter.js'    // Custom JavaScript
+                    ],
+                    '<%= dirs.js %>/vanilla-masker.min.js': [
+                        '<%= dirs.js %>/vanilla-masker.js'    // Custom JavaScript
                     ]
                 }
             }

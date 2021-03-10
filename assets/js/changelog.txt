@@ -1,0 +1,5 @@
+https://github.com/vanilla-masker/vanilla-masker
+In vanilla-masker.js, on line 85, changed:
+    if (this.elements[i].value.length)
+to
+    if ((typeof (this.elements[i].value) !== 'undefined' && this.elements[i].value !== null) && this.elements[i].value.length)
