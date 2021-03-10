@@ -164,6 +164,7 @@ add_action('woocommerce_before_checkout_billing_form', function ($checkout) {
 
     if ($tooltip_text_endereco) {
         echo '<input type="text" data-tooltip-field="billing_address_1_field" id="tooltip_text_endereco" value="' . $tooltip_text_endereco . '" disabled />';
+        echo '<input type="text" data-tooltip-field="shipping_address_1_field" id="tooltip_text_endereco" value="' . $tooltip_text_endereco . '" disabled />';
     }
 
     if ($tooltip_text_endereco_email) {
