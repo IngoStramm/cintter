@@ -29,12 +29,37 @@
             }
             .col-1,
             .col-2 {
-                width: 100% !important;
+                float: none;
+                margin-left: auto;
+                margin-right: auto;
+                // width: 100% !important;
             }
         }
     }
 }
 
-#billing_country_field {
+#billing_country_field,
+#tooltip-texts {
     display: none;
+}
+
+
+.has-tooltip {
+    label {
+        display: inline !important;
+    }
+}
+
+.cintter-tooltip-icon {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    vertical-align: middle;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
+    line-height: 1rem;
 }

@@ -12,7 +12,7 @@ function remove_order_notes($fields)
     return $fields;
 }
 
-// adiciona os campos do aluno
+// adiciona os campos do aluno e  prepara os campos com tooltip
 add_filter('woocommerce_checkout_fields', function ($fields) {
 
     $fields['billing']['order_title_aluno_section'] = array(
@@ -34,31 +34,31 @@ add_filter('woocommerce_checkout_fields', function ($fields) {
         'priority'    => 2
     );
 
-    $fields['billing']['order_ano_curso'] = array(
-        'label'     => __('Qual ano o aluno está cursando', 'cintter'),
+    $fields['billing']['order_data_nascimento_aluno'] = array(
+        'label'     => __('Data de nascimento', 'cintter'),
         'required'  => true,
-        'class'     => array('form-row-wide', 'cintter-nome-do-curso'),
+        'class'     => array('form-row-wide', 'cintter-data-nascimento-do-aluno', 'js-mask-date'),
         'clear'     => true,
         'type'        => 'text',
         'priority'    => 3
     );
 
-    $fields['billing']['order_gmail_aluno'] = array(
-        'label'     => __('Gmail do aluno (caso não tenha um gmail, clique <a href="https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp" target="_blank">aqui</a> para criar gratuitamente)', 'cintter'),
+    $fields['billing']['order_escolaridade'] = array(
+        'label'     => __('Escolaridade', 'cintter'),
         'required'  => true,
-        'class'     => array('form-row-wide', 'cintter-gmail-do-aluno'),
+        'class'     => array('form-row-wide', 'cintter-escolaridade'),
         'clear'     => true,
         'type'        => 'text',
         'priority'    => 4
     );
 
-    $fields['billing']['order_data_nascimento_aluno'] = array(
-        'label'     => __('Data de nascimento do aluno', 'cintter'),
+    $fields['billing']['order_gmail_aluno'] = array(
+        'label'     => __('Endereço Gmail <small>(caso o aluno não tenha uma conta do Gmail clique <a href="https://www.google.com/accounts/NewAccount?hl=pt-br" target="_blank" style="text-decoration: underline;">aqui</a> para criar gratuitamente.)</small>', 'cintter'),
         'required'  => true,
-        'class'     => array('form-row-wide', 'cintter-data-nascimento-do-aluno', 'js-mask-date'),
+        'class'     => array('form-row-wide', 'cintter-gmail-do-aluno'),
         'clear'     => true,
         'type'        => 'text',
-        'priority'    => 5
+        'priority'    => 4
     );
 
     $fields['billing']['order_title_billing_section'] = array(
@@ -83,14 +83,14 @@ function cintter_checkout_field_update_order_meta($order_id)
     if (!empty($_POST['order_nome_aluno']))
         update_post_meta($order_id, 'order_nome_aluno', sanitize_text_field($_POST['order_nome_aluno']));
 
-    if (!empty($_POST['order_ano_curso']))
-        update_post_meta($order_id, 'order_ano_curso', sanitize_text_field($_POST['order_ano_curso']));
+    if (!empty($_POST['order_data_nascimento_aluno']))
+        update_post_meta($order_id, 'order_data_nascimento_aluno', sanitize_text_field($_POST['order_data_nascimento_aluno']));
+
+    if (!empty($_POST['order_escolaridade']))
+        update_post_meta($order_id, 'order_escolaridade', sanitize_text_field($_POST['order_escolaridade']));
 
     if (!empty($_POST['order_gmail_aluno']))
         update_post_meta($order_id, 'order_gmail_aluno', sanitize_text_field($_POST['order_gmail_aluno']));
-
-    if (!empty($_POST['order_data_nascimento_aluno']))
-        update_post_meta($order_id, 'order_data_nascimento_aluno', sanitize_text_field($_POST['order_data_nascimento_aluno']));
 }
 
 // Exibe dados do aluno no pedido
@@ -107,11 +107,11 @@ function rec_add_alunos_to_emails_notifications($order)
 
     $order_id = method_exists($order, 'get_id') ? $order->get_id() : $order->id;
     $order_nome_aluno = get_post_meta($order_id, 'order_nome_aluno', true);
-    $order_ano_curso = get_post_meta($order_id, 'order_ano_curso', true);
-    $order_gmail_aluno = get_post_meta($order_id, 'order_gmail_aluno', true);
     $order_data_nascimento_aluno = get_post_meta($order_id, 'order_data_nascimento_aluno', true);
+    $order_escolaridade = get_post_meta($order_id, 'order_escolaridade', true);
+    $order_gmail_aluno = get_post_meta($order_id, 'order_gmail_aluno', true);
 
-    if (!$order_nome_aluno && !$order_ano_curso && !$order_gmail_aluno && !$order_data_nascimento_aluno)
+    if (!$order_nome_aluno && !$order_data_nascimento_aluno && !$order_gmail_aluno && !$order_escolaridade)
         return;
 
     $output = '';
@@ -122,18 +122,53 @@ function rec_add_alunos_to_emails_notifications($order)
         $output .= '<strong>' . __('Nome do Aluno', 'cintter') . ':</strong> <span class="text">' . $order_nome_aluno . '</span><br />';
     }
 
-    if ($order_ano_curso) {
-        $output .= '<strong>' . __('Ano do aluno', 'cintter') . ':</strong> <span class="text">' . $order_ano_curso . '</span><br />';
+    if ($order_data_nascimento_aluno) {
+        $output .= '<strong>' . __('Data de nascimento', 'cintter') . ':</strong> <span class="text">' . $order_data_nascimento_aluno . '</span><br />';
+    }
+
+    if ($order_escolaridade) {
+        $output .= '<strong>' . __('Escolaridade', 'cintter') . ':</strong> <span class="text">' . $order_escolaridade . '</span><br />';
     }
 
     if ($order_gmail_aluno) {
-        $output .= '<strong>' . __('Gmail do aluno', 'cintter') . ':</strong> <span class="text">' . $order_gmail_aluno . '</span><br />';
-    }
-
-    if ($order_data_nascimento_aluno) {
-        $output .= '<strong>' . __('Data de nascimento do aluno', 'cintter') . ':</strong> <span class="text">' . $order_data_nascimento_aluno . '</span><br />';
+        $output .= '<strong>' . __('Endereço Gmail', 'cintter') . ':</strong> <span class="text">' . $order_gmail_aluno . '</span><br />';
     }
 
     $output .= '</div>';
     echo $output;
 }
+
+add_action('woocommerce_before_checkout_billing_form', function ($checkout) {
+    $tooltip_text_data_nascimento_aluno = cintter_get_tooltip_text('tooltip_text_data_nascimento_aluno');
+    $tooltip_text_escolaridade = cintter_get_tooltip_text('tooltip_text_escolaridade');
+    $tooltip_text_gmail_aluno = cintter_get_tooltip_text('tooltip_text_gmail_aluno');
+    $tooltip_text_endereco = cintter_get_tooltip_text('tooltip_text_endereco');
+    $tooltip_text_endereco_email = cintter_get_tooltip_text('tooltip_text_endereco');
+
+    if (!$tooltip_text_escolaridade && !$tooltip_text_gmail_aluno && !$tooltip_text_data_nascimento_aluno && !$tooltip_text_endereco && !$tooltip_text_endereco_email)
+        return;
+
+    echo '<div id="tooltip-texts">';
+
+    if ($tooltip_text_data_nascimento_aluno) {
+        echo '<input type="text" data-tooltip-field="order_data_nascimento_aluno_field" id="tooltip_text_data_nascimento_aluno" value="' . $tooltip_text_data_nascimento_aluno . '" disabled />';
+    }
+
+    if ($tooltip_text_escolaridade) {
+        echo '<input type="text" data-tooltip-field="order_escolaridade_field" id="tooltip_text_escolaridade" value="' . $tooltip_text_escolaridade . '" disabled />';
+    }
+
+    if ($tooltip_text_gmail_aluno) {
+        echo '<input type="text" data-tooltip-field="order_gmail_aluno_field" id="tooltip_text_gmail_aluno" value="' . $tooltip_text_gmail_aluno . '" disabled />';
+    }
+
+    if ($tooltip_text_endereco) {
+        echo '<input type="text" data-tooltip-field="billing_address_1_field" id="tooltip_text_endereco" value="' . $tooltip_text_endereco . '" disabled />';
+    }
+
+    if ($tooltip_text_endereco_email) {
+        echo '<input type="text" data-tooltip-field="billing_email_field" id="tooltip_text_endereco_email" value="' . $tooltip_text_endereco_email . '" disabled />';
+    }
+
+    echo '</div>';
+});
