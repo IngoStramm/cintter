@@ -58,7 +58,7 @@ add_filter('woocommerce_checkout_fields', function ($fields) {
         'class'     => array('form-row-wide', 'cintter-gmail-do-aluno'),
         'clear'     => true,
         'type'        => 'text',
-        'priority'    => 4
+        'priority'    => 5
     );
 
     $fields['billing']['order_title_billing_section'] = array(
@@ -143,7 +143,7 @@ add_action('woocommerce_before_checkout_billing_form', function ($checkout) {
     $tooltip_text_escolaridade = cintter_get_tooltip_text('tooltip_text_escolaridade');
     $tooltip_text_gmail_aluno = cintter_get_tooltip_text('tooltip_text_gmail_aluno');
     $tooltip_text_endereco = cintter_get_tooltip_text('tooltip_text_endereco');
-    $tooltip_text_endereco_email = cintter_get_tooltip_text('tooltip_text_endereco');
+    $tooltip_text_endereco_email = cintter_get_tooltip_text('tooltip_text_endereco_email');
 
     if (!$tooltip_text_escolaridade && !$tooltip_text_gmail_aluno && !$tooltip_text_data_nascimento_aluno && !$tooltip_text_endereco && !$tooltip_text_endereco_email)
         return;

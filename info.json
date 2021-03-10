@@ -1,6 +1,6 @@
 {
     "name": "Cintter",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "download_url": "https://github.com/IngoStramm/cintter/raw/master/dist/cintter.zip",
     "homepage": "https://agencialaf.com",
     "requires": "4.7",
