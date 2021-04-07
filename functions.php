@@ -36,6 +36,7 @@ function cintter_customizacao_vendedor()
         remove_menu_page('edit.php?post_type=evento');
         remove_menu_page('edit.php?post_type=elementor_library');
         remove_menu_page('edit.php?post_type=qmn_log');
+        remove_menu_page('envato-elements');
         remove_menu_page('qsm_dashboard');
         remove_menu_page('tools.php');
         remove_menu_page('ari-stream-quiz');
