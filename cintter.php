@@ -4,7 +4,7 @@
  * Plugin Name: Cintter
  * Plugin URI: https://agencialaf.com
  * Description: Descrição do Cintter.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Author: Ingo Stramm
  * Text Domain: cintter
  * License: GPLv2
@@ -15,15 +15,9 @@ defined('ABSPATH') or die('No script kiddies please!');
 define('CINTTER_DIR', plugin_dir_path(__FILE__));
 define('CINTTER_URL', plugin_dir_url(__FILE__));
 
-function cintter_debug($debug)
-{
-    echo '<pre>';
-    var_dump($debug);
-    echo '</pre>';
-}
-
 require_once 'tgm/tgm.php';
 require_once 'classes/classes.php';
+require_once 'functions.php';
 require_once 'scripts.php';
 require_once 'cmb.php';
 require_once 'woocommerce.php';

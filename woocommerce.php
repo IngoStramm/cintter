@@ -216,3 +216,15 @@ function cintter_search_distinct($where)
     }
     return $where;
 }
+
+// previne que o usuário "vendedor" possa atribuir uma role customizada (o Users Role exibe esta opção na tela de criação de usuário)
+add_filter('ure_show_additional_capabilities_section', function ($show) {
+    $role = wp_get_current_user();
+    if (!$role)
+        return $show;
+
+    if (in_array('seller', $role->roles))
+        return;
+    else
+        return $show;
+});
