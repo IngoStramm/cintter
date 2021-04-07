@@ -39,6 +39,13 @@ function cintter_customizacao_vendedor()
         remove_menu_page('qsm_dashboard');
         remove_menu_page('tools.php');
         remove_menu_page('ari-stream-quiz');
+
+        remove_submenu_page('envato-elements', 'envato-elements#/welcome');
+        remove_submenu_page('envato-elements', 'envato-elements#/settings');
+        remove_submenu_page('envato-elements', 'envato-elements#/template-kits/free-kits');
+        remove_submenu_page('envato-elements', 'envato-elements#/template-kits/free-blocks');
+        remove_submenu_page('envato-elements', 'envato-elements#/template-kits/installed-kits');
+
     });
 
     add_action('admin_bar_menu', function ($wp_admin_bar) {
