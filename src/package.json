@@ -1,7 +1,7 @@
 {
     "name": "cintter",
     "description": "Descrição do Cintter.",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "title": "Cintter",
     "homepage": "https://agencialaf.com",
     "main": "Gruntfile.js",
