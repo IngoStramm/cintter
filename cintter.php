@@ -4,7 +4,7 @@
  * Plugin Name: Cintter
  * Plugin URI: https://agencialaf.com
  * Description: Descrição do Cintter.
- * Version: 0.2.0
+ * Version: 0.2.1
  * Author: Ingo Stramm
  * Text Domain: cintter
  * License: GPLv2

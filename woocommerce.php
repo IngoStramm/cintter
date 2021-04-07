@@ -211,7 +211,7 @@ function cintter_search_distinct($where)
 {
     global $pagenow;
 
-    if (is_admin() && $pagenow == 'edit.php' && $_GET['post_type'] == 'shop_order' && $_GET['s'] != '') {
+    if (is_admin() && $pagenow == 'edit.php' && $_GET['post_type'] == 'shop_order' && isset($_GET['s']) && $_GET['s'] != '') {
         return "DISTINCT";
     }
     return $where;
